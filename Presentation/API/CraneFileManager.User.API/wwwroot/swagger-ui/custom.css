@@ -1,0 +1,265 @@
+﻿/* Primary colors */
+.swagger-ui .topbar .download-url-wrapper .select-label select {
+    border: 2px solid #62a03f;
+}
+
+.swagger-ui .info .title small.version-stamp {
+    background-color: #62a03f;
+}
+
+.swagger-ui .info a {
+    color: #2e82e5;
+}
+
+.swagger-ui .response-control-media-type--accept-controller select {
+    border-color: #47b750;
+}
+
+.swagger-ui .response-control-media-type__accept-message {
+    color: #47b750;
+}
+
+.swagger-ui .btn.authorize {
+    color: rgb(141, 199, 111);
+    border-color: rgb(141, 199, 111);
+}
+
+    .swagger-ui .btn.authorize svg {
+        fill: rgb(141, 199, 111);
+    }
+
+/* HTTP methods colors */
+.swagger-ui .opblock.opblock-post {
+    background: rgba(141, 199, 111, 0.08);
+    border-color: rgb(141, 199, 111);
+}
+
+    .swagger-ui .opblock.opblock-post .opblock-summary-method {
+        background: rgb(141, 199, 111);
+    }
+
+.swagger-ui .opblock.opblock-get {
+    background: rgba(74, 176, 244, 0.08);
+    border-color: rgb(74, 176, 244);
+}
+
+    .swagger-ui .opblock.opblock-get .opblock-summary-method {
+        background: rgb(74, 176, 244);
+    }
+
+.swagger-ui .opblock.opblock-head {
+    background: rgba(217, 115, 234, 0.08);
+    border-color: rgb(217, 115, 234);
+}
+
+    .swagger-ui .opblock.opblock-head .opblock-summary-method {
+        background: rgb(217, 115, 234);
+    }
+
+.swagger-ui .opblock.opblock-put {
+    background: rgba(189, 135, 86, 0.08);
+    border-color: rgb(189, 135, 86);
+}
+
+    .swagger-ui .opblock.opblock-put .opblock-summary-method {
+        background: rgb(189, 135, 86);
+    }
+
+.swagger-ui .opblock.opblock-delete {
+    background: rgba(237, 99, 113, 0.08);
+    border-color: rgb(237, 99, 113);
+}
+
+    .swagger-ui .opblock.opblock-delete .opblock-summary-method {
+        background: rgb(237, 99, 113);
+    }
+
+.swagger-ui .opblock.opblock-options {
+    background: rgba(210, 175, 60, 0.08);
+    border-color: rgb(210, 175, 60);
+}
+
+    .swagger-ui .opblock.opblock-options .opblock-summary-method {
+        background: rgb(210, 175, 60);
+    }
+
+.swagger-ui .opblock.opblock-patch {
+    background: rgba(113, 128, 147, 0.08);
+    border-color: rgb(113, 128, 147);
+}
+
+    .swagger-ui .opblock.opblock-patch .opblock-summary-method {
+        background: rgb(113, 128, 147);
+    }
+
+/* General styles */
+body {
+    background-color: #272C35;
+    color: white;
+}
+
+.swagger-ui .topbar {
+    background-color: #313845;
+}
+
+.swagger-ui .scheme-container {
+    background: #272C35;
+}
+
+.swagger-ui section.models .model-container {
+    background: #272C35;
+    border-radius: 2px;
+}
+
+.swagger-ui select {
+    background: #313845;
+    border-radius: 6px;
+    color: rgb(179, 187, 201);
+}
+
+.swagger-ui section.models {
+    border: 1px solid rgba(220, 220, 255, 0.1);
+    background-color: #20252C;
+}
+
+.swagger-ui .opblock .opblock-section-header {
+    background: #272C35;
+}
+
+.swagger-ui .body-param__example,
+.swagger-ui .example {
+    background-color: #272C35 !important;
+    border-radius: 6px !important;
+}
+
+.swagger-ui .copy-to-clipboard {
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 6px;
+}
+
+.swagger-ui .opblock .opblock-summary-method {
+    border-radius: 2px;
+}
+
+.swagger-ui input[type="email"],
+.swagger-ui input[type="file"],
+.swagger-ui input[type="password"],
+.swagger-ui input[type="search"],
+.swagger-ui input[type="text"],
+.swagger-ui textarea {
+    background: #272C35;
+    border: 1px solid rgba(220, 220, 255, 0.1);
+    border-radius: 6px;
+    color: rgb(179, 187, 201);
+    outline: none;
+}
+
+.swagger-ui .dialog-ux .modal-ux-header {
+    border-bottom: 1px solid rgba(220, 220, 255, 0.1);
+}
+
+.swagger-ui .btn {
+    border: 2px solid rgba(220, 220, 255, 0.1);
+    border-radius: 6px;
+    color: rgb(179, 187, 201);
+}
+
+.swagger-ui .dialog-ux .modal-ux {
+    background: #20252C;
+    border: 1px solid rgba(220, 220, 255, 0.1);
+    border-radius: 6px;
+}
+
+.swagger-ui .auth-btn-wrapper {
+    justify-content: left;
+}
+
+.swagger-ui .opblock-tag {
+    border-bottom: 1px solid rgba(220, 220, 255, 0.1);
+}
+
+.swagger-ui section.models.is-open h4 {
+    border-bottom: 1px solid rgba(220, 220, 255, 0.1);
+}
+
+.swagger-ui .opblock {
+    border-radius: 6px;
+}
+
+.swagger-ui section.models {
+    border-radius: 6px;
+}
+
+/* Focus styles */
+.swagger-ui .model-box-control:focus,
+.swagger-ui .models-control:focus,
+.swagger-ui .opblock-summary-control:focus {
+    outline: none;
+}
+
+/* Icons */
+.swagger-ui .model-toggle::after {
+    opacity: 0.28;
+    filter: invert(1);
+}
+
+.swagger-ui svg:not(:root) {
+    fill: rgb(179, 187, 201);
+}
+
+.swagger-ui .opblock-summary-control svg:not(:root) {
+    opacity: 0.5;
+}
+
+/* Text styles */
+.swagger-ui {
+    color: rgb(179, 187, 201);
+}
+
+    .swagger-ui .info .title,
+    .swagger-ui a.nostyle,
+    .swagger-ui .model-title,
+    .swagger-ui .models-control,
+    .swagger-ui .dialog-ux .modal-ux-header h3,
+    .swagger-ui .dialog-ux .modal-ux-content h4,
+    .swagger-ui label,
+    .swagger-ui .opblock .opblock-section-header h4,
+    .swagger-ui .tab li button.tablinks,
+    .swagger-ui .opblock-description-wrapper p,
+    .swagger-ui .opblock-external-docs-wrapper p,
+    .swagger-ui .opblock-title_normal p,
+    .swagger-ui table thead tr td,
+    .swagger-ui table thead tr th,
+    .swagger-ui .response-col_status,
+    .swagger-ui .parameter__name,
+    .swagger-ui .opblock .opblock-summary-operation-id,
+    .swagger-ui .opblock .opblock-summary-path,
+    .swagger-ui .opblock .opblock-summary-path__deprecated {
+        color: rgb(179, 187, 201);
+    }
+
+    .swagger-ui .dialog-ux .modal-ux-content p,
+    .swagger-ui .response-col_links,
+    .swagger-ui .parameter__type,
+    .swagger-ui .prop-format,
+    .swagger-ui .opblock .opblock-summary-description,
+    .swagger-ui .info li,
+    .swagger-ui .info p,
+    .swagger-ui .info table,
+    .swagger-ui .model {
+        color: rgba(177, 203, 255, 0.3);
+    }
+
+    .swagger-ui .topbar svg:not(:root) {
+        display: none;
+    }
+
+.topbar-wrapper .link:before {
+    background-image: url(minilogo2.png);
+    background-size: 205.8px 40px;
+    display: inline-block;
+    width: 205.8px;
+    height: 40px;
+    content: "";
+}
+

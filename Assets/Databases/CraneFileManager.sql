@@ -1,0 +1,234 @@
+CREATE DATABASE CraneFileManager;
+
+USE CraneFileManager;
+
+
+-- İstifadəçi
+
+CREATE TABLE [User]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [Name] NVARCHAR(max) DEFAULT NULL,
+   [Surname] NVARCHAR(max) DEFAULT NULL,
+   [Username] NVARCHAR(max) DEFAULT NULL,
+   [Password] NVARCHAR(max) DEFAULT NULL,
+   [IsBlcok] Bit DEFAULT NULL,
+   [IsActive] Bit DEFAULT NULL,
+   [ConfirmPassword] NVARCHAR(max) DEFAULT NULL ,
+   [Email] NVARCHAR(max) DEFAULT NULL,
+   [ProfileImage] NVARCHAR(max) DEFAULT NULL,
+   [Birthday] DATETIME2 DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   [RefreshToken] NVARCHAR(max) DEFAULT NULL,
+   [RefreshTokenExpiryTime] datetime2 DEFAULT NULL,
+   [SecretKey]  NVARCHAR(max) DEFAULT NULL,
+);
+
+
+-- Rol
+
+CREATE TABLE [Role]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [Name] NVARCHAR(max) DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+);
+
+
+-- İstifadçi və Rol
+
+CREATE TABLE [UserRole]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   
+   [UserId] UNIQUEIDENTIFIER NULL,
+   [RoleId] UNIQUEIDENTIFIER NULL,
+
+   CONSTRAINT [FK_UserId_forUserRole] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_RoleId_forUserRole] FOREIGN KEY ([RoleId]) REFERENCES [Role] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+);
+
+
+-- İstifadəçi icazələri
+
+CREATE TABLE [UserPermission]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [UserAccess] NVARCHAR(max) DEFAULT NULL,
+   [UserAccessDescription] NVARCHAR(max) DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+);
+
+
+-- Rol icazələri
+
+CREATE TABLE [RolePermission]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [Method] NVARCHAR(max) DEFAULT NULL,
+   [MethodDescription] NVARCHAR(max) DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+);
+
+
+-- İstifadçi tələbləri
+
+CREATE TABLE [UserClaim]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   
+   [UserId] UNIQUEIDENTIFIER NULL,
+   [UserPermitionId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_UserId_forUserClaim] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_UserPermitionId_forUserClaim] FOREIGN KEY ([UserPermitionId]) REFERENCES [UserPermission] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- Rol tələbləri
+
+
+CREATE TABLE [RoleClaim]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   
+   [RoleId] UNIQUEIDENTIFIER NULL,
+   [RolePermissionId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_RoleId_forRoleClaim] FOREIGN KEY ([RoleId]) REFERENCES [Role] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_RolePermissionId_forRoleClaim] FOREIGN KEY ([RolePermissionId]) REFERENCES [RolePermission] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- Fayl tipi
+
+CREATE TABLE [FileType]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [Type] NVARCHAR(max) DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+);
+
+
+-- Fayl
+
+CREATE TABLE [File]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [OrginalName] NVARCHAR(max) DEFAULT NULL,
+   [DisplayName] NVARCHAR(max) DEFAULT NULL,
+   [Description] NVARCHAR(max) DEFAULT NULL,
+   [Size] NVARCHAR(max) DEFAULT NULL,
+   [Path] NVARCHAR(max) DEFAULT NULL,
+   [isRemove] Bit DEFAULT NULL,
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   
+   [FileTypeId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_FileTypeId_forFile] FOREIGN KEY ([FileTypeId]) REFERENCES [FileType] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- İstifadəçiyə aid fayllar
+
+CREATE TABLE [UserFile]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+   
+   [FileId] UNIQUEIDENTIFIER NULL,
+   [UserId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_FileId_forUseFile] FOREIGN KEY ([FileId]) REFERENCES [File] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_UserId_forUseFile] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- Fayl Paylaşımı
+
+CREATE TABLE [FileShare]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+
+   [FileId] UNIQUEIDENTIFIER NULL,
+   [UserId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_FileId_forFileShare] FOREIGN KEY ([FileId]) REFERENCES [File] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_UserId_forFileShare] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- Fayl Zibil Qutusu
+
+CREATE TABLE [FileTrashCan]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [ThrowTrashDate] DATETIME2 DEFAULT NULL,
+   [TakeofTrashDate] DATETIME2 DEFAULT NULL,
+
+   [FileId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_FileId_forFileTrashCan] FOREIGN KEY ([FileId]) REFERENCES [File] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+-- Bildiriş
+
+CREATE TABLE [Notification]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [Title] NVARCHAR(max) DEFAULT NULL,
+   [Description] NVARCHAR(max) DEFAULT NULL,
+   [NotificationDate] DATETIME2 DEFAULT NULL,
+);
+
+
+-- İstifadəçiyə aid bildiriş
+
+CREATE TABLE [UserNotification]
+(
+   [Id] UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+   [CreatedDate] DATETIME2 DEFAULT NULL,
+   [UpdatedDate] DATETIME2 DEFAULT NULL,
+
+   [UserId] UNIQUEIDENTIFIER NULL,
+   [NotificationId] UNIQUEIDENTIFIER NULL,
+   
+   CONSTRAINT [FK_UserId_forUserNotification] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+   CONSTRAINT [FK_NotificationId_forUserNotification] FOREIGN KEY ([NotificationId]) REFERENCES [Notification] ([Id]) ON DELETE NO ACTION ON UPDATE NO ACTION,
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

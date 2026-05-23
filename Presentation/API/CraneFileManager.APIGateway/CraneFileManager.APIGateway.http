@@ -1,0 +1,6 @@
+@CraneFileManager.APIGateway_HostAddress = http://localhost:5106
+
+GET {{CraneFileManager.APIGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
